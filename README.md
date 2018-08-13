@@ -11,20 +11,20 @@
 
 ---
 
-## Objetivo
-Projeto de crawler para postar mensagens em grupos de Facebook.
+## Objective
+Crawler project to post messages in social networks' personal feeds or groups.
 
 ## Setup
-### Variáveis de ambiente
-* FB_USER: Nome do usuário autor; 
-* FB_PASS: Senha do usuário autor;
+### Environment variables
+* FB_USER: Author's username;
+* FB_PASS: Author's password;
 
-### Argumentos da função
-* groups  :: Array<string>: IDs dos grupos de Facebook;
-* message :: string: Mensagem a ser postada nos grupos;
+### Function arguments
+* groups  :: Array<string>: Social network group ID;
+* message :: string: Message to be posted;
 
-## Ambientes de execução
+## Execution environments
 * Microsoft Azure Functions: ✓
-* Local: ⚠ precisa dos seguintes passos:
-  1. adicionar os environment variables `process.env.user = 'usuario@email.com'` e `process.env.pass = 'senha'`;
-  1. fazer a chamada a função `main({ ...console, body: { groups: ['id1', 'id2'], message: 'bla' } })`;
+* Localhost: ⚠ requires the following steps:
+  1. add environment variables in code `process.env.FB_USER = 'user@email.com'` and `process.env.FB_PASS = 'password'` or in your system;
+  1. make function call `main({ ...console, body: { groups: ['id1', 'id2'], message: 'something' } })`;
