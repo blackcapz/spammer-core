@@ -1,4 +1,15 @@
-# NOALVO postador-grupos-facebook
+<p align="center">
+  <h3 align="center">Spammer</h3>
+  <p align="center">Strategy-oriented social network spammer.</p>
+
+  <p align="center">
+  <a href="http://standardjs.com/">
+    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
+  </a>
+  </p>
+</p>
+
+---
 
 ## Objetivo
 Projeto de crawler para postar mensagens em grupos de Facebook.
