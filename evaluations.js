@@ -1,8 +1,8 @@
 module.exports = page => ({
-  async loginAtWith(url, { user, pass }) {
+  async loginAtWith(url, { FB_USER, FB_PASS }) {
     await page.goto(url)
-    await page.type('#m_login_email', user)
-    await page.type('#m_login_password', pass)
+    await page.type('#m_login_email', FB_USER)
+    await page.type('#m_login_password', FB_PASS)
     await page.keyboard.press('Enter')
 
     return page.waitForNavigation()
