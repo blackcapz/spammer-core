@@ -6,13 +6,13 @@ const facebookURL = 'https://m.facebook.com'
 
 async function main(context) {
   const { groups, message } = context.body
-  const { user, pass } = process.env
+  const { FB_USER, FB_PASS } = process.env
   const browser = await puppeteer.launch(launchOptions)
   const loginPage = await browser.newPage()
   const { loginAtWith } = makePageEvaluations(loginPage)
 
-  await loginAtWith(facebookURL, { user, pass })
-  context.log(`Logged in as ${user}`)
+  await loginAtWith(facebookURL, { FB_USER, FB_PASS })
+  context.log(`Logged in as ${FB_USER}`)
 
   const promises = groups.map(async (group) => {
     const groupPage = await browser.newPage()
