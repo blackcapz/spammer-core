@@ -1,31 +1,20 @@
 const puppeteer = require('puppeteer')
-const makePageEvaluations = require('./evaluations')
+const Spammer = require('./lib/spammer')
+const FacebookStrategy = require('./strategies/Facebook')
 
-const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
-const facebookURL = 'https://m.facebook.com'
+const app = async () => {
 
-async function main(context) {
-  const { groups, message } = context.body
-  const { FB_USER, FB_PASS } = process.env
-  const browser = await puppeteer.launch(launchOptions)
-  const loginPage = await browser.newPage()
-  const { loginAtWith } = makePageEvaluations(loginPage)
-
-  await loginAtWith(facebookURL, { FB_USER, FB_PASS })
-  context.log(`Logged in as ${FB_USER}`)
-
-  const promises = groups.map(async (group) => {
-    const groupPage = await browser.newPage()
-    const { postInGroupAt } = makePageEvaluations(groupPage)
-    const postedGroup = await postInGroupAt(facebookURL, group, message)
-
-    context.log(`Message posted in group "${postedGroup}" (${group})`)
+  const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
+  const spammer = new Spammer({
+    strategy: 'Facebook',
+    groups: [
+      '1353655578103416',
+      '231049354264315'
+    ],
+    text: 'Hello World with strategy man'
   })
-
-  await Promise.all(promises)
-  await browser.close()
-
-  context.res = { status: 200, body: 'All messages have been posted' }
+  spammer.apply(FacebookStrategy)
+  spammer.run(await puppeteer.launch(launchOptions))
 }
 
-module.exports = main
+app()
