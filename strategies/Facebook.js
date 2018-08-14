@@ -25,6 +25,6 @@ module.exports = class Facebook {
     await page.click('button.touchable')
     await page.type('textarea', text)
     await page.click('button[value="Publicar"]:not(.touchable)')
-    context.log(`Message posted in group "${page.title()}" (${group})`)
+    console.log(`Message posted in group "${await page.title()}" (${group})`)
   }
 }
