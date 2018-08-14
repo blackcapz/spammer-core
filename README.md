@@ -14,18 +14,44 @@
 ## Objective
 Crawler project to post messages in social networks' personal feeds or groups.
 
-## Setup
 ### Environment variables
 * SPAMMER_USER: Author's username;
-* SPAMMER_USER: Author's password;
+* SPAMMER_PASS: Author's password;
 
-### Function arguments
-* groups  :: Array<string>: Social network group ID;
-* text :: string: Message to be posted;
+### Usage
 
-## Execution environments
+Run `npm start` locally, the request body varies according to the strategy, only `strategy`, `text`, `user` and `pass` are standard on every request.
 
+**`POST /spam`**
+
+```json
+{
+	"strategy": "Facebook",
+	"groups": [
+		"123",
+		"321"
+	],
+	"user": "user@domain.com.br",
+	"pass": "123@change",
+	"text": "Testing message"
+}
+```
+
+_Response if successfully_
+```json
+{
+  "status": 200,
+  "body": "All messages have been posted"
+}
+```
+
+### Strategies payload
+
+- Facebook
+  + groups  :: Array< string >: Social network group ID;
+
+### Execution environments
+
+- [x] Localhost
+- [ ] AWS Lambda
 - [ ] Microsoft Azure Functions:
-- [x] * Localhost: ⚠ requires the following steps:
-  1. add environment variables in code `process.env.FB_USER = 'user@email.com'` and `process.env.FB_PASS = 'password'` or in your system;
-  1. make function call `main({ ...console, body: { groups: ['id1', 'id2'], message: 'something' } })`;
