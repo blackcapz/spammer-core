@@ -3,9 +3,9 @@
   <p align="center">Strategy-oriented social network spammer.</p>
 
   <p align="center">
-  <a href="http://standardjs.com/">
-    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
-  </a>
+    <a href="http://standardjs.com/">
+      <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
+    </a>
   </p>
 </p>
 
@@ -19,6 +19,8 @@ Crawler project to post messages in social networks' personal feeds or groups.
 * SPAMMER_PASS: Author's password;
 
 ### Usage
+
+> **You can use the [Spammer Runner](https://github.com/blackcapz/spammer-runner) project(basically is an docker environment) to use the [UI](https://github.com/blackcapz/spammer-ui) and [Core](https://github.com/blackcapz/spammer-core) instead of using REST access.**
 
 Run `npm start` locally, the request body varies according to the strategy, only `strategy`, `text`, `user` and `pass` are required in all requests.
 
