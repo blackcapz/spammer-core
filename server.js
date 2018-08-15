@@ -19,6 +19,7 @@ const spam = async (req, res) => {
     user,
     pass
   } = await json(req)
+  console.log('* Request received to', user)
   const spammer = new Spammer({
     strategy,
     groups,
@@ -40,12 +41,17 @@ const Routes = router(
   get('/', root),
   get('/*', notfound)
 )
+// 1353655578103416 231049354264315
 
 http.
   createServer((req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Request-Method', '*')
-
+    res.setHeader('Access-Control-Allow-Methods', '*')
+    res.setHeader('Access-Control-Allow-Headers', '*')
+    if (req.method === 'OPTIONS') {
+      res.writeHead(200)
+    }
     Routes(req, res)
   })
   .listen(5000)
