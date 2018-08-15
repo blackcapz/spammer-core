@@ -42,6 +42,11 @@ const Routes = router(
 )
 
 http.
-  createServer(Routes)
+  createServer((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Request-Method', '*')
+
+    Routes(req, res)
+  })
   .listen(5000)
 console.log('* Server running..')
