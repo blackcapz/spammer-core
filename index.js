@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const Spammer = require('./lib/spammer')
 const FacebookStrategy = require('./strategies/Facebook')
 
-async function main (context) {
+async function main () {
   const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
   const spammer = new Spammer({
     strategy: 'Facebook',

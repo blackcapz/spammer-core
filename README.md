@@ -20,7 +20,7 @@ Crawler project to post messages in social networks' personal feeds or groups.
 
 ### Usage
 
-Run `npm start` locally, the request body varies according to the strategy, only `strategy`, `text`, `user` and `pass` are standard on every request.
+Run `npm start` locally, the request body varies according to the strategy, only `strategy`, `text`, `user` and `pass` are required in all requests.
 
 **`POST /spam`**
 
