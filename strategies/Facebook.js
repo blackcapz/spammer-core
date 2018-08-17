@@ -8,9 +8,10 @@ module.exports = class Facebook {
     return 'Facebook'
   }
 
-  constructor ({ user, pass }) {
+  constructor ({ user, pass, ids }) {
     this.user = user
     this.pass = pass
+    this.ids = ids
     this.postDelayTime = 1000
     this.queues = []
     this.URL = 'https://m.facebook.com'
@@ -26,10 +27,10 @@ module.exports = class Facebook {
     return page.waitForNavigation()
   }
 
-  async post (browser, groups, text) {
+  async post (browser, ids, text) {
     const MAX_QUEUE_SLICE = 4
     let queue = []
-    groups.forEach(group => {
+    ids.forEach(id => {
       if (queue.length === MAX_QUEUE_SLICE) {
         this.queues.push(queue)
         queue = []
@@ -37,14 +38,16 @@ module.exports = class Facebook {
       }
       const handler = () => {
         const page = await browser.newPage()
-        await page.goto(`${this.URL}/groups/${group}`)
+        await page.goto(`${this.URL}/groups/${id}`)
         await page.click('button.touchable')
         await page.type('textarea', text)
         await page.click('button[value="Publicar"]:not(.touchable)')
-        this.Logger(this.context, `Message posted in group "${await page.title()}" (${group})`)
+        this.Logger(this.context, `Message posted in id "${await page.title()}" (${id})`)
       }
       queue.push(handler)
     })
+    this.run()
+    browser.close()
   }
 
   run () {
