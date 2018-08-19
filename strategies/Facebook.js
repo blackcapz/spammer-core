@@ -51,6 +51,6 @@ module.exports = class Facebook {
   }
 
   run () {
-    this.queues.forEach(queue => wait(1000, allSettled(queue)))
+    this.queues.forEach(queue => wait(this.postDelayTime, allSettled(queue)))
   }
 }
