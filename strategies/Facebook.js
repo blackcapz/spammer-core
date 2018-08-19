@@ -2,19 +2,22 @@ const {
   wait,
   allSettled
 } = require('../utils/helpers')
+const Plugin = require('../lib/plugins')
 
 module.exports = class Facebook {
   static get name () {
     return 'Facebook'
   }
 
-  constructor ({ user, pass, ids }) {
+  constructor ({ user, pass, ids, context }) {
     this.user = user
     this.pass = pass
     this.ids = ids
     this.postDelayTime = 1000
     this.queues = []
     this.URL = 'https://m.facebook.com'
+    this.context = context
+    Object.assign(this, new Plugin())
   }
 
   async login (browser) {
@@ -23,8 +26,9 @@ module.exports = class Facebook {
     await page.type('#m_login_email', this.user)
     await page.type('#m_login_password', this.pass)
     await page.keyboard.press('Enter')
-
-    return page.waitForNavigation()
+    await page.waitForNavigation()
+    this.Logger(`Logged in as ${this.user}`)
+    return this
   }
 
   post (browser, text) {

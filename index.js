@@ -7,12 +7,12 @@ async function main (context) {
   const spammer = new Spammer({
     user: '',
     pass: '',
-    context,
     strategy: 'Facebook',
     text: 'Hello World with queue'
   })
   spammer
     .apply(FacebookStrategy, {
+      context,
       ids: [
         '1353655578103416',
         '231049354264315',
