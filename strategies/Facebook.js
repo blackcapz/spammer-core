@@ -13,11 +13,9 @@ module.exports = class Facebook {
     this.user = user
     this.pass = pass
     this.ids = ids
-    this.postDelayTime = 1000
-    this.queues = []
+    this.delayTime = 0
     this.URL = 'https://m.facebook.com'
-    this.context = context
-    Object.assign(this, new Plugin())
+    Object.assign(this, new Plugin(context))
   }
 
   async login (browser) {
@@ -43,7 +41,9 @@ module.exports = class Facebook {
           await page.click('button.touchable')
           await page.type('textarea', text)
           await page.click('button[value="Publicar"]:not(.touchable)')
-          this.Logger(this.context, `Message posted in id "${await page.title()}" (${id})`) 
+          this.Logger(
+            `Message posted in id "${await page.title()}" (${id}) - ${new Date()}`
+          )
           resolve()
         } catch (postError) {
           reject(postError)
@@ -52,15 +52,15 @@ module.exports = class Facebook {
       queue.push(handler)
 
       if (queue.length === MAX_QUEUE_SLICE || index === (this.ids.length - 1)) {
-        this.queues.push(queue)
+        this.run(queue)
+        this.delayTime += 10000
         queue = []
       }
     })
-    this.run()
-    browser.close()
+    // browser.close()
   }
 
-  run () {
-    this.queues.forEach(queue => wait(this.postDelayTime, allSettled(queue)))
+  run (queue) {
+    wait(this.delayTime, () => allSettled(queue)) 
   }
 }

@@ -8,7 +8,7 @@ async function main (context) {
     user: '',
     pass: '',
     strategy: 'Facebook',
-    text: 'Hello World with queue'
+    text: 'Delay time working' + new Date().getTime()
   })
   spammer
     .apply(FacebookStrategy, {
