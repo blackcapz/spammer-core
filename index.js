@@ -12,8 +12,6 @@ async function main () {
   })
   spammer
     .apply(FacebookStrategy, {
-      user: '',
-      pass: '',
       ids: [
         '1353655578103416',
         '231049354264315',
