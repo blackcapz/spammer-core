@@ -28,6 +28,7 @@ module.exports = class Facebook {
   }
 
   async post (browser, ids, text) {
+    if (!this.ids.length) return new Error('You need to pass an Array with group Ids')
     const MAX_QUEUE_SLICE = 4
     let queue = []
     ids.forEach(id => {
