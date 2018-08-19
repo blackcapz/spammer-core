@@ -2,13 +2,14 @@ const puppeteer = require('puppeteer')
 const Spammer = require('./lib/spammer')
 const FacebookStrategy = require('./strategies/Facebook')
 
-async function main () {
+async function main (context) {
   const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
   const spammer = new Spammer({
     user: '',
     pass: '',
+    context,
     strategy: 'Facebook',
-    text: 'Hello World with strategy man'
+    text: 'Hello World with queue'
   })
   spammer
     .apply(FacebookStrategy, {
@@ -22,3 +23,5 @@ async function main () {
     })
     .run(await puppeteer.launch(launchOptions))
 }
+
+main(console)

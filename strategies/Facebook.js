@@ -27,25 +27,30 @@ module.exports = class Facebook {
     return page.waitForNavigation()
   }
 
-  async post (browser, ids, text) {
-    if (!this.ids.length) return new Error('You need to pass an Array with group Ids')
+  post (browser, text) {
+    if (!this.ids.length) return new Error('You need to pass an Array with feed Ids')
     const MAX_QUEUE_SLICE = 4
     let queue = []
-    ids.forEach(id => {
-      if (queue.length === MAX_QUEUE_SLICE) {
+    this.ids.map((id, index) => {
+      const handler = new Promise(async (resolve, reject) => {
+        try {
+          const page = await browser.newPage()
+          await page.goto(`${this.URL}/groups/${id}`)
+          await page.click('button.touchable')
+          await page.type('textarea', text)
+          await page.click('button[value="Publicar"]:not(.touchable)')
+          this.Logger(this.context, `Message posted in id "${await page.title()}" (${id})`) 
+          resolve()
+        } catch (postError) {
+          reject(postError)
+        }
+      })
+      queue.push(handler)
+
+      if (queue.length === MAX_QUEUE_SLICE || index === (this.ids.length - 1)) {
         this.queues.push(queue)
         queue = []
-        return
       }
-      const handler = () => {
-        const page = await browser.newPage()
-        await page.goto(`${this.URL}/groups/${id}`)
-        await page.click('button.touchable')
-        await page.type('textarea', text)
-        await page.click('button[value="Publicar"]:not(.touchable)')
-        this.Logger(this.context, `Message posted in id "${await page.title()}" (${id})`)
-      }
-      queue.push(handler)
     })
     this.run()
     browser.close()
