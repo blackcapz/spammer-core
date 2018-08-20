@@ -17,12 +17,12 @@ Crawler project to post messages in social networks' personal feeds or groups.
 
 ### Environment variables
 
-* SPAMMER_USER: Author's username (optional if you pass on context)
-* SPAMMER_PASS: Author's password (optional if you pass on context)
-* SLACK_HOOK: Slack URL Hook
-* SLACK_CHANNEL: Slack channel
-* SLACK_EMOJI: Slack icon emoji
-* SLACK_USERNAME: Slack username
+* `SPAMMER_USER`: Author's username (optional if you pass on context)
+* `SPAMMER_PASS`: Author's password (optional if you pass on context)
+* `SLACK_HOOK`: Slack URL Hook
+* `SLACK_CHANNEL`: Slack channel
+* `SLACK_EMOJI`: Slack icon emoji
+* `SLACK_USERNAME`: Slack username
 
 ### Usage
 
@@ -56,7 +56,7 @@ _Response if successfully_
 ### Strategies payload
 
 - Facebook
-  + groups  :: Array< string >: Social network group ID;
+  + `ids`: Array< string >: Social network feed/page/group IDs;
 
 ### Execution environments
 
