@@ -14,23 +14,22 @@ const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
 const spam = async (req, res) => {
   const {
     strategy = 'Facebook',
-    groups = [],
-    text,
-    user,
-    pass
+    ids = [],
+    text = '',
+    user = '',
+    pass = ''
   } = await json(req)
   console.log('* Request received to', user)
   const spammer = new Spammer({
     strategy,
-    groups,
     text,
     user,
     pass
   })
-  spammer.apply(FacebookStrategy)
-  
-  await spammer.run(await puppeteer.launch(launchOptions))
-  send(res, 200, { status: 200, body: 'All messages have been posted' })
+  spammer
+    .apply(FacebookStrategy, { ...console, ids })
+    .run(await puppeteer.launch(launchOptions))
+  send(res, 200, { status: 200, body: 'All messages have been received and are being processed :)' })
 }
 
 const root = (req, res) => send(res, 200, { status: 'ok' })
@@ -41,7 +40,6 @@ const Routes = router(
   get('/', root),
   get('/*', notfound)
 )
-// 1353655578103416 231049354264315
 
 http.
   createServer((req, res) => {
