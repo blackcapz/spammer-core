@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const Spammer = require('./lib/spammer')
 const FacebookStrategy = require('./strategies/Facebook')
 
-function main (context) {
+async function main (context) {
   const { body: {
     user = '',
     pass = '',
@@ -21,4 +21,17 @@ function main (context) {
  * To test locally
  * console is the context
  */
-// main(console)
+/*
+main({
+  ...console,
+  body: {
+    user: 'me@me.com',
+    pass: '123@change',
+    text: 'Hey brother',
+    ids: [
+      '123',
+      '321'
+    ]
+  }
+})
+*/

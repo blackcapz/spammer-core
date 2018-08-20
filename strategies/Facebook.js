@@ -41,6 +41,9 @@ module.exports = class Facebook {
           await page.click('button.touchable')
           await page.type('textarea', text)
           await page.click('button[value="Publicar"]:not(.touchable)')
+          this.Slack(
+            `Message posted in id "${await page.title()}" (${id}) - ${new Date()}`
+          )
           this.Logger(
             `Message posted in id "${await page.title()}" (${id}) - ${new Date()}`
           )
@@ -51,13 +54,18 @@ module.exports = class Facebook {
       })
       queue.push(handler)
 
-      if (queue.length === MAX_QUEUE_SLICE || index === (this.ids.length - 1)) {
+      if (queue.length === MAX_QUEUE_SLICE) {
         this.run(queue)
         this.delayTime += 60000
         queue = []
+      } 
+
+      if (index === (this.ids.length - 1)) {
+        this.run(queue)
+        this.delayTime += 10000
+        wait(this.delayTime, () => browser.close())
       }
     })
-    // browser.close()
   }
 
   run (queue) {
