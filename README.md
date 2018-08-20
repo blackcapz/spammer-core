@@ -11,12 +11,18 @@
 
 ---
 
-## Objective
+### Objective
+
 Crawler project to post messages in social networks' personal feeds or groups.
 
 ### Environment variables
-* SPAMMER_USER: Author's username;
-* SPAMMER_PASS: Author's password;
+
+* SPAMMER_USER: Author's username (optional if you pass on context)
+* SPAMMER_PASS: Author's password (optional if you pass on context)
+* SLACK_HOOK: Slack URL Hook
+* SLACK_CHANNEL: Slack channel
+* SLACK_EMOJI: Slack icon emoji
+* SLACK_USERNAME: Slack username
 
 ### Usage
 
@@ -28,14 +34,14 @@ Run `npm start` locally, the request body varies according to the strategy, only
 
 ```json
 {
-	"strategy": "Facebook",
-	"groups": [
-		"123",
-		"321"
-	],
-	"user": "user@domain.com.br",
-	"pass": "123@change",
-	"text": "Testing message"
+  "strategy": "Facebook",
+  "ids": [
+    "123",
+    "321"
+  ],
+  "user": "user@domain.com.br",
+  "pass": "123@change",
+  "text": "Testing message"
 }
 ```
 
