@@ -56,4 +56,4 @@ _Response if successfully_
 
 - [x] Localhost
 - [ ] AWS Lambda
-- [ ] Microsoft Azure Functions:
+- [x] Microsoft Azure Functions:
