@@ -2,28 +2,23 @@ const puppeteer = require('puppeteer')
 const Spammer = require('./lib/spammer')
 const FacebookStrategy = require('./strategies/Facebook')
 
-async function main (context) {
+function main (context) {
+  const { body: {
+    user = '',
+    pass = '',
+    strategy = 'Facebook',
+    text = '',
+    ids = []
+  } } = context
   const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
-  const spammer = new Spammer({
-    user: '',
-    pass: '',
-    strategy: 'Facebook',
-    text: 'Delay time working with diferent text ' + new Date().getTime()
-  })
+  const spammer = new Spammer({ user, pass, strategy, text })
   spammer
-    .apply(FacebookStrategy, {
-      context,
-      ids: [
-        '1353655578103416',
-        '231049354264315',
-        '231049354264315',
-        '231049354264315',
-        '1353655578103416',
-        '231049354264315',
-        '1353655578103416'
-      ]
-    })
+    .apply(FacebookStrategy, { context, ids })
     .run(await puppeteer.launch(launchOptions))
 }
 
-main(console)
+/**
+ * To test locally
+ * console is the context
+ */
+// main(console)
