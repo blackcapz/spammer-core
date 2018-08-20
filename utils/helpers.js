@@ -5,7 +5,7 @@ exports.allSettled = (promises, { onlyFulfilled = false, onlyRejected = false } 
   const captureSuccess = result => ({ state: 'fulfilled', result })
   const captureFail = error => ({ state: 'rejected', error })
   const settled = Promise.all(
-    promises.map(p => p.then(captureSuccess).catch(captureFail))
+    promises.map(p => p().then(captureSuccess).catch(captureFail))
   )
 
   if (onlyFulfilled) {

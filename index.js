@@ -8,13 +8,15 @@ async function main (context) {
     user: '',
     pass: '',
     strategy: 'Facebook',
-    text: 'Delay time working' + new Date().getTime()
+    text: 'Delay time working with diferent text ' + new Date().getTime()
   })
   spammer
     .apply(FacebookStrategy, {
       context,
       ids: [
         '1353655578103416',
+        '231049354264315',
+        '231049354264315',
         '231049354264315',
         '1353655578103416',
         '231049354264315',

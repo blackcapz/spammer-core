@@ -34,7 +34,7 @@ module.exports = class Facebook {
     const MAX_QUEUE_SLICE = 4
     let queue = []
     this.ids.map((id, index) => {
-      const handler = new Promise(async (resolve, reject) => {
+      const handler = () => new Promise(async (resolve, reject) => {
         try {
           const page = await browser.newPage()
           await page.goto(`${this.URL}/groups/${id}`)
@@ -53,7 +53,7 @@ module.exports = class Facebook {
 
       if (queue.length === MAX_QUEUE_SLICE || index === (this.ids.length - 1)) {
         this.run(queue)
-        this.delayTime += 10000
+        this.delayTime += 60000
         queue = []
       }
     })
@@ -61,6 +61,6 @@ module.exports = class Facebook {
   }
 
   run (queue) {
-    wait(this.delayTime, () => allSettled(queue)) 
+    wait(this.delayTime, () => allSettled(queue))
   }
 }
