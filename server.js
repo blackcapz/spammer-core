@@ -41,5 +41,5 @@ http.
     }
     Routes(req, res)
   })
-  .listen(5000)
+  .listen(80)
 console.log('* Server running..')
