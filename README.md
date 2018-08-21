@@ -55,9 +55,3 @@ _Response if successfully_
 
 - Facebook
   + `ids`: Array< string >: Social network feed/page/group IDs;
-
-### Execution environments
-
-- [x] Localhost
-- [ ] AWS Lambda
-- [x] Microsoft Azure Functions:
