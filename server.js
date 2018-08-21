@@ -41,5 +41,5 @@ http.
     }
     Routes(req, res)
   })
-  .listen(80)
+  .listen(process.env.PORT || 3000)
 console.log('* Server running..')
