@@ -5,30 +5,18 @@ const {
   get,
   post
 } = require('microrouter')
-const puppeteer = require('puppeteer')
 const Spammer = require('./lib/spammer')
 const FacebookStrategy = require('./strategies/Facebook')
 
-const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
+const spammer = new Spammer()
+spammer.apply(FacebookStrategy)
 
 const spam = async (req, res) => {
-  const {
-    strategy = 'Facebook',
-    ids = [],
-    text = '',
-    user = '',
-    pass = ''
-  } = await json(req)
-  console.log('* Request received to', user)
-  const spammer = new Spammer({
-    strategy,
-    text,
-    user,
-    pass
-  })
-  spammer
-    .apply(FacebookStrategy, { ...console, ids })
-    .run(await puppeteer.launch(launchOptions))
+  const { strategy = 'Facebook', ids, text = '' } = await json(req)
+  console.log('* Request received to', process.env.SPAMMER_USER)
+  spammer.setText(text)
+  await spammer.setStrategy(strategy)
+  spammer.run(ids)
   send(res, 200, { status: 200, body: 'All messages have been received and are being processed :)' })
 }
 

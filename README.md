@@ -28,7 +28,7 @@ Crawler project to post messages in social networks' personal feeds or groups.
 
 > **You can use the [Spammer Runner](https://github.com/blackcapz/spammer-runner) project(basically is an docker environment) to use the [UI](https://github.com/blackcapz/spammer-ui) and [Core](https://github.com/blackcapz/spammer-core) instead of using REST access.**
 
-Run `npm start` locally, the request body varies according to the strategy, only `strategy`, `text`, `user` and `pass` are required in all requests.
+Run `npm start` locally, the request body varies according to the strategy, only `strategy` and `text`  are required in all requests.
 
 **`POST /spam`**
 
@@ -39,8 +39,6 @@ Run `npm start` locally, the request body varies according to the strategy, only
     "123",
     "321"
   ],
-  "user": "user@domain.com.br",
-  "pass": "123@change",
   "text": "Testing message"
 }
 ```
@@ -57,9 +55,3 @@ _Response if successfully_
 
 - Facebook
   + `ids`: Array< string >: Social network feed/page/group IDs;
-
-### Execution environments
-
-- [x] Localhost
-- [ ] AWS Lambda
-- [x] Microsoft Azure Functions:

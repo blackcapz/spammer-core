@@ -9,13 +9,17 @@ module.exports = class Facebook {
     return 'Facebook'
   }
 
-  constructor ({ user, pass, ids, context }) {
+  constructor ({ user, pass, ids }) {
     this.user = user
     this.pass = pass
     this.ids = ids
     this.delayTime = 0
     this.URL = 'https://m.facebook.com'
-    Object.assign(this, new Plugin(context))
+    Object.assign(this, new Plugin())
+  }
+
+  setIds (ids) {
+    this.ids = (ids && Array.isArray(ids)) ? ids : [ids]
   }
 
   async login (browser) {
@@ -29,7 +33,9 @@ module.exports = class Facebook {
     return this
   }
 
-  post (browser, text) {
+  post (browser, text, ids) {
+    this.setIds(ids)
+
     if (!this.ids.length) return new Error('You need to pass an Array with feed Ids')
     const MAX_QUEUE_SLICE = 4
     let queue = []
@@ -42,10 +48,10 @@ module.exports = class Facebook {
           await page.type('textarea', text)
           await page.click('button[value="Publicar"]:not(.touchable)')
           this.Slack(
-            `Message posted in id "${await page.title()}" (${id}) - ${new Date()}`
+            `Message posted "${await page.title()}" (${id}) - ${new Date()} by ${this.user}`
           )
           this.Logger(
-            `Message posted in id "${await page.title()}" (${id}) - ${new Date()}`
+            `Message posted "${await page.title()}" (${id}) - ${new Date()} by ${this.user}`
           )
           resolve()
         } catch (postError) {
@@ -58,12 +64,12 @@ module.exports = class Facebook {
         this.run(queue)
         this.delayTime += 60000
         queue = []
-      } 
-
+      }
+      
       if (index === (this.ids.length - 1)) {
         this.run(queue)
-        this.delayTime += 10000
-        wait(this.delayTime, () => browser.close())
+        this.delayTime = 0
+        queue = []
       }
     })
   }
