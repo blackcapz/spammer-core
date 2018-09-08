@@ -22,6 +22,17 @@ module.exports = class Facebook {
     this.ids = (ids && Array.isArray(ids)) ? ids : [ids]
   }
 
+  getSpecificUrl (type, id) {
+    const TYPES = {
+      group: `${this.URL}/groups/${id}`,
+      pageOrFeed: `${this.URL}/${id}`
+    }
+
+   return TYPES[type]
+      ? TYPES[type]
+      : new Error('Type not provided')
+  }
+
   async login (browser) {
     const page = await browser.newPage()
     await page.goto(this.URL)
@@ -33,7 +44,7 @@ module.exports = class Facebook {
     return this
   }
 
-  post (browser, text, ids) {
+  post (browser, type, text, ids) {
     this.setIds(ids)
 
     if (!this.ids.length) return new Error('You need to pass an Array with feed Ids')
@@ -43,7 +54,7 @@ module.exports = class Facebook {
       const handler = () => new Promise(async (resolve, reject) => {
         try {
           const page = await browser.newPage()
-          await page.goto(`${this.URL}/groups/${id}`)
+          await page.goto(this.getSpecificUrl(type, id))
           await page.click('button.touchable')
           await page.type('textarea', text)
           await page.click('button[value="Publicar"]:not(.touchable)')

@@ -12,7 +12,7 @@ const spammer = new Spammer()
 spammer.apply(FacebookStrategy)
 
 const spam = async (req, res) => {
-  const { strategy = 'Facebook', ids, text = '' } = await json(req)
+  const { strategy = 'Facebook', ids, type, text = '' } = await json(req)
   console.log('* Request received to', process.env.SPAMMER_USER)
   spammer.setText(text)
   await spammer.setStrategy(strategy)
