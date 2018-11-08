@@ -9,7 +9,7 @@ const {
 } = require('microrouter')
 
 const readdirPromise = promisify(readdir)
-const Spammer = require('./lib/spammer')
+const Spammer = require('./lib/Spammer')
 const spammer = new Spammer()
 
 const spam = async (req, res) => {
