@@ -8,4 +8,8 @@ const Q_NAME = 'SPAMMER'
 
 exports.rsmq = rsmq
 exports.Q_NAME = Q_NAME
-exports.createQueue = async () => await rsmq.createQueue({ qname: Q_NAME })
+exports.createQueue = async () => {
+  const queues = await rsmq.listQueues()
+  if (queues.includes(Q_NAME)) return
+  await rsmq.createQueue({ qname: Q_NAME })
+}
