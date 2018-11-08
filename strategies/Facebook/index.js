@@ -70,7 +70,7 @@ module.exports = class Facebook {
     await POST_TYPES[item.type]()
     console.log(`${item.id} - message posted!`)
     await rsmq.deleteMessage({ qname: Q_NAME, id: queueId })
-    console.log('Message delete from queue')
+    console.log(`${item.id} - message delete from queue`)
   }
 
 }
