@@ -16,7 +16,7 @@ The easiest way to spam social networks. Just create a strategy or use one of th
 
 ### Usage
 
-![flow](./assets/flow.png)
+![flow](./assets/dg.png)
 
 > **You can use the [Spammer Runner](https://github.com/blackcapz/spammer-runner) project(basically is an docker environment) to use the [UI](https://github.com/blackcapz/spammer-ui) and [Core](https://github.com/blackcapz/spammer-core) instead of using REST access.**
 
