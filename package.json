@@ -12,9 +12,11 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "every-moment": "0.0.1",
     "micro": "^9.3.3",
     "microrouter": "^3.1.3",
-    "puppeteer": "^1.7.0"
+    "puppeteer": "^1.7.0",
+    "rsmq-promise": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
