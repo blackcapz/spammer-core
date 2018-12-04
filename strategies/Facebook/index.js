@@ -14,7 +14,7 @@ module.exports = class Facebook {
     this.pass = pass
     this.data = []
     this.URL = 'https://m.facebook.com'
-    this.interval = null;
+    this.interval = null
   }
 
   async listenMessages () {
