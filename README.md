@@ -1,4 +1,5 @@
 <p align="center">
+  <img width="60" align="center" src="./assets/spammer.png" alt="logo spammer" />
   <h3 align="center">Spammer</h3>
   <p align="center">Strategy-oriented social network spammer.</p>
 
@@ -11,47 +12,25 @@
 
 ---
 
-### Objective
-
-Crawler project to post messages in social networks' personal feeds or groups.
-
-### Environment variables
-
-* `SPAMMER_USER`: Author's username (optional if you pass on context)
-* `SPAMMER_PASS`: Author's password (optional if you pass on context)
-* `SLACK_HOOK`: Slack URL Hook
-* `SLACK_CHANNEL`: Slack channel
-* `SLACK_EMOJI`: Slack icon emoji
-* `SLACK_USERNAME`: Slack username
+The easiest way to spam social networks. Just create a strategy or use one of the existing ones.
 
 ### Usage
 
+![flow](./assets/flow.png)
+
 > **You can use the [Spammer Runner](https://github.com/blackcapz/spammer-runner) project(basically is an docker environment) to use the [UI](https://github.com/blackcapz/spammer-ui) and [Core](https://github.com/blackcapz/spammer-core) instead of using REST access.**
 
-Run `npm start` locally, the request body varies according to the strategy, only `strategy` and `text`  are required in all requests.
-
-**`POST /spam`**
-
-```json
-{
-  "strategy": "Facebook",
-  "ids": [
-    "123",
-    "321"
-  ],
-  "text": "Testing message"
-}
-```
-
-_Response if successfully_
-```json
-{
-  "status": 200,
-  "body": "All messages have been posted"
-}
-```
+Basically is a **`POST`** method to **`/spam`** 
 
 ### Strategies payload
 
-- Facebook
-  + `ids`: Array< string >: Social network feed/page/group IDs;
+_facebook_
+```json
+{
+  ... 
+  "data": [
+    { "id": "group-1", "text": "Hello World" }
+  ]
+  ...
+}
+```
