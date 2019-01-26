@@ -12,7 +12,12 @@
 
 ---
 
-The easiest way to spam social networks. Just create a strategy or use one of the existing ones.
+Welcome to the easiest way to spam social networks. <br>
+It's a simple REST api to spam yours social networks.
+
+### Getting start
+- Install dependencies: `npm install`
+- Run the server: `npm run start`
 
 ### Usage
 
@@ -22,15 +27,22 @@ The easiest way to spam social networks. Just create a strategy or use one of th
 
 Basically is a **`POST`** method to **`/spam`** 
 
-### Strategies payload
+### Sending a request
 
 _facebook_
+
+[POST] URL:`http://localhost:3000/spam`
+
+[Body]:
 ```json
 {
-  ... 
-  "data": [
-    { "id": "group-1", "text": "Hello World" }
-  ]
-  ...
+	"strategy":"Facebook",
+	"user": "<YOUR_EMAIL>",
+	"pass": "<YOUR_PASSWORD>",
+	"data": [
+		{ "id": "<group_id>",
+		  "text": "<Message>",
+		  "type": "GROUP or FEED"
+		}]
 }
 ```
