@@ -43,6 +43,14 @@ _facebook_
 		{ "id": "<group_id>",
 		  "text": "<Message>",
 		  "type": "GROUP or FEED"
+    },
+    { "id": "<group_id>",
+		  "text": "<Message>",
+		  "type": "GROUP or FEED"
+    },
+    { "id": "<group_id>",
+		  "text": "<Message>",
+		  "type": "GROUP or FEED"
 		}]
 }
 ```
