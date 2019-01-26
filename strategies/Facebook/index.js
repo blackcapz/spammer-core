@@ -42,7 +42,7 @@ module.exports = class Facebook {
     this.listenMessages()
   }
 
-  async publish(page, text){
+  async publish(page, text) {
     await page.click('div._4g34._6ber._5i2i._52we')
     await page.type('textarea', text)
     await page.click('button[value="Publicar"]:not(.touchable)')
