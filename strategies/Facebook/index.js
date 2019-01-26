@@ -45,7 +45,6 @@ module.exports = class Facebook {
   async run () {
     const { message, id: queueId } = await rsmq.receiveMessage({ qname: Q_NAME })
     const item = this.data.find(i => i.id === message)
-    
     if (!item) {
       this.interval.stop()
       return
