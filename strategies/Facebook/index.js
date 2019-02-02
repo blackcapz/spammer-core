@@ -46,6 +46,8 @@ module.exports = class Facebook {
     await page.click('div._4g34._6ber._5i2i._52we')
     await page.type('textarea', text)
     await page.click('button[value="Publicar"]:not(.touchable)')
+    await page.waitForNavigation()
+    await page
   }
 
   async run () {
@@ -65,14 +67,15 @@ module.exports = class Facebook {
       GROUP: async () => {
         await page.goto(`${this.URL}/groups/${item.id}`)
         await this.publish(page,item.text)
+
       }
     }
 
-    console.log(`${item.id} - preparing post...`)
+    console.log(`[INFO] ${item.id} - preparing post...`)
     await POST_TYPES[item.type]()
-    console.log(`${item.id} - message posted!`)
+    console.log(`[INFO] ${item.id} - message posted!`)
     await rsmq.deleteMessage({ qname: Q_NAME, id: queueId })
-    console.log(`${item.id} - message delete from queue`)
+    console.log(`[INFO] ${item.id} - message delete from queue`)
   }
 
 }

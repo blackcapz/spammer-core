@@ -12,7 +12,9 @@
 
 ---
 
-Welcome to the easiest way to spam social networks. <br>
+Welcome to the easiest way to spam social networks. 
+
+
 It's a simple REST api to spam yours social networks.
 
 ### Getting start
@@ -40,15 +42,18 @@ _facebook_
 	"user": "<YOUR_EMAIL>",
 	"pass": "<YOUR_PASSWORD>",
 	"data": [
-		{ "id": "<group_id>",
+		{ 
+      "id": "<group_id>",
 		  "text": "<Message>",
 		  "type": "GROUP or FEED"
     },
-    { "id": "<group_id>",
+    { 
+      "id": "<group_id>",
 		  "text": "<Message>",
 		  "type": "GROUP or FEED"
     },
-    { "id": "<group_id>",
+    { 
+      "id": "<group_id>",
 		  "text": "<Message>",
 		  "type": "GROUP or FEED"
 		}]
