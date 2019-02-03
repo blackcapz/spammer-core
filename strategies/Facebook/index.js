@@ -42,10 +42,17 @@ module.exports = class Facebook {
     this.listenMessages()
   }
 
+  async publish(page, text) {
+    await page.click('div._4g34._6ber._5i2i._52we')
+    await page.type('textarea', text)
+    await page.click('button[value="Publicar"]:not(.touchable)')
+    await page.waitForNavigation()
+    await page
+  }
+
   async run () {
     const { message, id: queueId } = await rsmq.receiveMessage({ qname: Q_NAME })
     const item = this.data.find(i => i.id === message)
-    
     if (!item) {
       this.interval.stop()
       return
@@ -55,22 +62,20 @@ module.exports = class Facebook {
     const POST_TYPES = {
       FEED: async () => {
         await page.goto(`${this.URL}/${item.id}`)
-        await page.click('div._4g34._6ber._5i2i._52we')
-        await page.type('textarea', item.text)
-        await page.click('button[value="Publicar"]:not(.touchable)')
+        await this.publish(page,item.text)
       },
       GROUP: async () => {
         await page.goto(`${this.URL}/groups/${item.id}`)
-        await page.click('button.touchable')
-        await page.type('textarea', item.text)
-        await page.click('button[value="Publicar"]:not(.touchable)')
+        await this.publish(page,item.text)
+
       }
     }
 
+    console.log(`[INFO] ${item.id} - preparing post...`)
     await POST_TYPES[item.type]()
-    console.log(`${item.id} - message posted!`)
+    console.log(`[INFO] ${item.id} - message posted!`)
     await rsmq.deleteMessage({ qname: Q_NAME, id: queueId })
-    console.log(`${item.id} - message delete from queue`)
+    console.log(`[INFO] ${item.id} - message delete from queue`)
   }
 
 }
