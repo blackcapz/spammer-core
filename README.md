@@ -38,24 +38,24 @@ _facebook_
 [Body]:
 ```json
 {
-	"strategy":"Facebook",
-	"user": "<YOUR_EMAIL>",
-	"pass": "<YOUR_PASSWORD>",
-	"data": [
-		{ 
+  "strategy":"Facebook",
+  "user": "<YOUR_EMAIL>",
+  "pass": "<YOUR_PASSWORD>",
+  "data": [
+    { 
       "id": "<group_id>",
-		  "text": "<Message>",
-		  "type": "GROUP or FEED"
+      "text": "<Message>",
+      "type": "GROUP or FEED"
     },
     { 
       "id": "<group_id>",
-		  "text": "<Message>",
-		  "type": "GROUP or FEED"
+      "text": "<Message>",
+      "type": "GROUP or FEED"
     },
     { 
       "id": "<group_id>",
-		  "text": "<Message>",
-		  "type": "GROUP or FEED"
-		}]
+      "text": "<Message>",
+      "type": "GROUP or FEED"
+    }]
 }
 ```
